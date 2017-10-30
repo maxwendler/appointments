@@ -17,8 +17,6 @@ public class OffTime {
 
     }
 
-    public
-
     public Regularity getRegularity() {
         return regularity;
     }

@@ -17,3 +17,20 @@ h1 {
 	line-height: 3.2em;
 	text-align:center;
 }
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    table-layout: fixed;
+}
+
+td {
+    width: 14.28%;
+}
+
+header {
+    display: inline-block;
+    align-content: center;
+}

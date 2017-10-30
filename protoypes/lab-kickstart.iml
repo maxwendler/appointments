@@ -105,5 +105,7 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-devtools:1.5.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.7.RELEASE" level="project" />
+    <orderEntry type="library" name="junit-4.12" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
   </component>
 </module>

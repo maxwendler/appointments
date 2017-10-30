@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/style.css}" />
+    <title>Calendar</title>
+</head>
+<body>
+    <header>
+        <input type="button" value="back" onclick="window.location.href='http://localhost:8080/calendar?month=-1'"></input>
+        <input type="button" value="forward" onclick="window.location.href='http://localhost:8080/calendar?month=1'"></input>
+    </header>
+    <table style="width: 100%">
+        <caption>
+            <h1 th:text="${month}"></h1>
+            <h1 th:text="${year}"></h1>
+        </caption>
+        <tr>
+            <th>Montag</th>
+            <th>Dienstag</th>
+            <th>Mittwoch</th>
+            <th>Donnerstag</th>
+            <th>Freitag</th>
+            <th>Samstag</th>
+            <th>Sonntag</th>
+        </tr>
+        <tr th:each="week : ${weeks}">
+            <td th:each="day : ${week.days}">
+                <form  th:if="${day}"><input type="submit" value="" style="width:100%" th:value="${day}"></input></form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
