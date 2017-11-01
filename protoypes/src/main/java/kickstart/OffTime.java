@@ -1,19 +1,14 @@
 package kickstart;
 
-import java.util.GregorianCalendar;
+public class OffTime extends Appointment{
 
-public class OffTime {
+    public enum Regularity {ONCE, DAILY, WEEKLY};
+    private Regularity regularity;
 
-    private enum Regularity {ONCE, DAILY, WEEKLY};
-    Regularity regularity;
-    private GregorianCalendar date;
-    private int duration; // in hours
+    public OffTime (Regularity regularity, int year, int month, int dayOfMonth, int hourOfDay, int minute, int durationInHours){
 
-    public OffTime (Regularity regularity, int year, int month, int dayOfMonth, int hourOfDay, int minute, int duration){
-
+        super(year, month, dayOfMonth, hourOfDay, minute,durationInHours);
         this.regularity = regularity;
-        this.date = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute);
-        this.duration = duration;
 
     }
 

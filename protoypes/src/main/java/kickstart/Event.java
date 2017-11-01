@@ -7,27 +7,30 @@ import java.util.*;
 
 public class Event extends Product {
 
-    private String name;
-    private SortedSet<Appointment> appointments = new TreeSet<>();
+    protected String name;
+    protected int durationInHours;
+    protected SortedSet<Appointment> appointments = new TreeSet<>();
 
-    public Event(String name) {
+    public Event(String name, int durationInHours) {
         this.name = name;
+        this.durationInHours = durationInHours;
     }
 
     public String getName(){
         return name;
     }
 
-    public SortedSet<Appointment> getAppointments(){
-        return appointments;
-    }
-
-    public void addAppointment(int year, int month, int dayOfMonth, int hourOfDay, int minute, int durationInHours){
+    public void addAppointment(int year, int month, int dayOfMonth, int hourOfDay, int minute){
         appointments.add(new Appointment(year, month, dayOfMonth, hourOfDay, minute, durationInHours));
     }
 
-    public Iterable<String> getTimes (){
-
-        return null;
+    public Collection<Appointment> getAppoinments (Date date){
+        SortedSet<Appointment> appointmentsOnDate = new TreeSet<>();
+        for (Appointment appointment : appointments){
+            if ( (appointment.getStart().getTimeInMillis() <= date.getTime() && appointment.getEnd().getTimeInMillis() >= date.getTime()) ){
+                appointmentsOnDate.add(appointment);
+            }
+        }
+        return appointmentsOnDate;
     }
 }

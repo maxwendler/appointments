@@ -7,8 +7,12 @@
 </head>
 <body>
     <header>
-        <input type="button" value="back" onclick="window.location.href='http://localhost:8080/calendar?month=-1'"></input>
-        <input type="button" value="forward" onclick="window.location.href='http://localhost:8080/calendar?month=1'"></input>
+        <form action="http://localhost:8080/calendar?month=-1" method="post">
+            <input type="submit" value="weiter"></input>
+        </form>
+        <form action="http://localhost:8080/calendar?month=1" method="post">
+            <input type="submit" value="zurück"></input>
+        </form>
     </header>
     <table style="width: 100%">
         <caption>
@@ -27,9 +31,8 @@
         </tr>
         <tr th:each="week : ${weeks}">
             <td th:each="day : ${week.days}">
-                <form  th:if="${day}">
-                    <input type="button" style="width:100%" th:value="${day.getDayOfMonth()}"
-                    onclick="window.location.href='http://localhost:8080/book?eventId='"></input>
+                <form  th:if="${day}" th:action="${'http://localhost:8080/book?eventId=' + eventId + '&amp;date=' + day.getDate()}" method="post">
+                    <input type="submit" style="width:100%" th:value="${day.getDayOfMonth()}"></input>
                 </form>
             </td>
         </tr>
