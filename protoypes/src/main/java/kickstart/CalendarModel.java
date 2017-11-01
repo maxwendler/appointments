@@ -2,6 +2,7 @@ package kickstart;
 
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -13,7 +14,7 @@ public class CalendarModel {
     private static GregorianCalendar calendar;
 
     public class Week{
-        public int[] days = {0,0,0,0,0,0,0};
+        public Day[] days = {null,null,null,null,null,null,null};
 
         public String toString(){
             String string = "";
@@ -21,6 +22,23 @@ public class CalendarModel {
                 string = string + (i+1) + " : " + days[i] +" ;\n";
             }
             return string;
+        }
+    }
+
+    private class Day{
+        private GregorianCalendar calendar;
+
+        public Day (int year, int month, int dayOfMonth){
+            this.calendar = new GregorianCalendar(year, month, dayOfMonth);
+        }
+
+        public int getDayOfMonth(){
+            return calendar.get(Calendar.DAY_OF_MONTH);
+        }
+
+        public String getDate(){
+            DateFormat df = DateFormat.getDateInstance();
+            return df.format(calendar.getTime());
         }
     }
 
@@ -94,7 +112,9 @@ public class CalendarModel {
             Week week = new Week();
 
             while (operatingCalendar.get(Calendar.WEEK_OF_MONTH) == i){
-                week.days[(operatingCalendar.get(Calendar.DAY_OF_WEEK) + 5) % 7] = operatingCalendar.get(Calendar.DAY_OF_MONTH);
+                week.days[(operatingCalendar.get(Calendar.DAY_OF_WEEK) + 5) % 7] =
+                        new Day(operatingCalendar.get(Calendar.YEAR), operatingCalendar.get(Calendar.MONTH),
+                        operatingCalendar.get(Calendar.DAY_OF_MONTH));
                 operatingCalendar.add(Calendar.DAY_OF_MONTH,1);
             }
             weeks.add(week);
@@ -103,7 +123,9 @@ public class CalendarModel {
         Week weekInNextMonth = new Week();
 
         while (operatingCalendar.get(Calendar.DAY_OF_MONTH) != 1){
-            weekInNextMonth.days[(operatingCalendar.get(Calendar.DAY_OF_WEEK) + 5) % 7] =operatingCalendar.get(Calendar.DAY_OF_MONTH);
+            weekInNextMonth.days[(operatingCalendar.get(Calendar.DAY_OF_WEEK) + 5) % 7] =
+                    new Day(operatingCalendar.get(Calendar.YEAR), operatingCalendar.get(Calendar.MONTH),
+                    operatingCalendar.get(Calendar.DAY_OF_MONTH));;
             operatingCalendar.add(Calendar.DAY_OF_MONTH,1);
         }
         weeks.add(weekInNextMonth);

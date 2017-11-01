@@ -12,6 +12,7 @@
     </header>
     <table style="width: 100%">
         <caption>
+            <h1 th:text="${eventName}"></h1>
             <h1 th:text="${month}"></h1>
             <h1 th:text="${year}"></h1>
         </caption>
@@ -26,7 +27,10 @@
         </tr>
         <tr th:each="week : ${weeks}">
             <td th:each="day : ${week.days}">
-                <form  th:if="${day}"><input type="submit" value="" style="width:100%" th:value="${day}"></input></form>
+                <form  th:if="${day}">
+                    <input type="button" style="width:100%" th:value="${day.getDayOfMonth()}"
+                    onclick="window.location.href='http://localhost:8080/book?eventId='"></input>
+                </form>
             </td>
         </tr>
     </table>

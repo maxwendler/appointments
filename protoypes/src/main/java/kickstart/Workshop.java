@@ -1,6 +1,6 @@
 package kickstart;
 
-public class Workshop extends Event{
+/* public class Workshop extends Event{
 
     private enum Type {SINGLEDAY, MULTIDAY}
     Type type;
@@ -10,3 +10,4 @@ public class Workshop extends Event{
     }
 
 }
+*/

@@ -1,17 +1,33 @@
 package kickstart;
 
+import javafx.util.Pair;
 import org.salespointframework.catalog.Product;
 
-import java.util.GregorianCalendar;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
-public class Event extends Product{
+public class Event extends Product {
 
-    private int duration; //in hours
+    private String name;
+    private SortedSet<Appointment> appointments = new TreeSet<>();
 
-    private SortedSet<GregorianCalendar> appointments = new TreeSet<GregorianCalendar>();
+    public Event(String name) {
+        this.name = name;
+    }
 
+    public String getName(){
+        return name;
+    }
 
+    public SortedSet<Appointment> getAppointments(){
+        return appointments;
+    }
 
+    public void addAppointment(int year, int month, int dayOfMonth, int hourOfDay, int minute, int durationInHours){
+        appointments.add(new Appointment(year, month, dayOfMonth, hourOfDay, minute, durationInHours));
+    }
+
+    public Iterable<String> getTimes (){
+
+        return null;
+    }
 }
