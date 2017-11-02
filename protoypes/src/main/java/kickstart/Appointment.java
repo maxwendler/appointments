@@ -5,8 +5,8 @@ import java.util.GregorianCalendar;
 
 public class Appointment implements Comparable<Appointment>{
 
-    private GregorianCalendar start;
-    private GregorianCalendar end;
+    protected GregorianCalendar start;
+    protected GregorianCalendar end;
 
     public Appointment(int year, int month, int dayOfMonth, int hourOfDay, int minute, int durationInHours){
 

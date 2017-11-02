@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.*;
 
 @Controller
@@ -22,8 +23,8 @@ public class CalendarController {
 
         this.calendarModel = calendarModel;
 
-        Event ex1 = new Event("Fliegen lernen mit Fridolin");
-        ex1.addAppointment(2017,10,5,13,30,2);
+        Event ex1 = new Event("Fliegen lernen mit Fridolin",2);
+        ex1.addAppointment(2017,10,5,13,30);
         eventCatalog.put("e0001",ex1);
 
     }
@@ -41,7 +42,7 @@ public class CalendarController {
             Event event = eventCatalog.getOrDefault(eventId.get(), null);
             if (event != null) {
                 model.addAttribute("eventName", event.getName());
-                //model.addAttribute("eventId",eventId.get());
+                model.addAttribute("eventId",eventId.get());
             }else{
                 model.addAttribute("eventName","<EventNotFound>");
             }
@@ -53,21 +54,28 @@ public class CalendarController {
     }
 
     @RequestMapping("/book")
-    public String book(@RequestParam("eventId") Optional<String> eventId, @RequestParam("date") Optional<String> date, Model model){
+    public String book(@RequestParam("eventId") Optional<String> eventId, @RequestParam("date") Optional<String> dateString, Model model){
 
-        if (!(eventId.isPresent() && date.isPresent())){
-            DateFormat df = DateFormat.getDateInstance();
-            System.out.println(df.format(new Date()));
+        if (!(eventId.isPresent() && dateString.isPresent())){
             return "bookMissingParams";
         }
 
-        Event event = eventCatalog.getOrDefault(eventId,null);
+        Event event = eventCatalog.getOrDefault(eventId.get(),null);
+
+        DateFormat df = DateFormat.getDateInstance();
+        Date date =  new Date();
+        try {
+            date = df.parse(dateString.get());
+        }catch (ParseException e) {
+            System.out.println("Date String not parsable: " + dateString.get() );
+        }
 
         if (event == null){
             model.addAttribute("eventName","<EventNotFound>");
         }else{
             model.addAttribute("eventName",event.getName());
-            model.addAttribute("appointments",event.getAppointments());
+            model.addAttribute("date",dateString);
+            model.addAttribute("appointments",event.getAppoinments(date));
         }
 
         return "book";
