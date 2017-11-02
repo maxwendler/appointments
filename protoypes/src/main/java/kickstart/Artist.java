@@ -15,43 +15,57 @@ public class Artist {
     }
 
     public Iterable<Appointment> getAppointments (Date date){
-        SortedSet<Appointment> times = new TreeSet<>();
-        times.addAll(getPersonalAppointments(date));
+        SortedSet<Appointment> appointments = new TreeSet<>();
+        appointments.addAll(getPersonalAppointments(date));
         for (ArtistGroup group : groups){
-            times.addAll(group.getShowAppointments(date));
+            appointments.addAll(group.getShowAppointments(date));
         }
-        return times;
+        return appointments;
     }
 
 
     public Collection<Appointment> getPersonalAppointments (Date date){
         SortedSet<Appointment> personalAppointments = new TreeSet<>();
+
         for (Event workshop : workshops){
             personalAppointments.addAll(workshop.getAppoinments(date));
         }
+
+        GregorianCalendar start = new GregorianCalendar();
+        GregorianCalendar end = new GregorianCalendar();
+
+        start.setTime(date);
+        start.set(Calendar.HOUR_OF_DAY,0);
+        start.set(Calendar.MINUTE,0);
+        end.setTime(date);
+        end.set(Calendar.HOUR_OF_DAY,23);
+        end.set(Calendar.MINUTE, 59);
+
         for (OffTime offTime : offTimes){
             switch (offTime.getRegularity()){
                 case ONCE:
-                    if ( (offTime.getStart().getTimeInMillis() <= date.getTime()
-                            && offTime.getEnd().getTimeInMillis() >= date.getTime()) ){
+                    if ( start.before(offTime.getStart()) && end.after(offTime.getStart())){
                         personalAppointments.add(offTime);
                     }
                     break;
                 case DAILY:
-                    double day = 8.64e+7;
-                    if ( (offTime.getStart().getTimeInMillis() % day <= date.getTime() % day
-                            && offTime.getEnd().getTimeInMillis() % day >= date.getTime() % day) ) {
-                        personalAppointments.add(offTime);
-                    }
+                    personalAppointments.add(offTime);
                     break;
                 case WEEKLY:
                     double week = 6.048e+8;
-                    if ( (offTime.getStart().getTimeInMillis() % week <= date.getTime() % week
-                            && offTime.getEnd().getTimeInMillis() % week >= date.getTime() % week) ) {
+                    if ((offTime.getStart().get(Calendar.DAY_OF_WEEK) == start.get(Calendar.DAY_OF_WEEK))) {
                         personalAppointments.add(offTime);
                     }
             }
         }
         return personalAppointments;
+    }
+
+    public void addWorkshop(Workshop w){
+        workshops.add(w);
+    }
+
+    public void addOfftime(OffTime o){
+        offTimes.add(o);
     }
 }

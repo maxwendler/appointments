@@ -1,5 +1,6 @@
-package kickstart;
+package kickstart.tests;
 
+import kickstart.CalendarModel;
 import org.junit.Before;
 import org.junit.Test;
 

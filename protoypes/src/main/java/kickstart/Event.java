@@ -5,7 +5,7 @@ import org.salespointframework.catalog.Product;
 
 import java.util.*;
 
-public class Event extends Product {
+public class Event implements Comparable<Event>{
 
     protected String name;
     protected int durationInHours;
@@ -26,11 +26,26 @@ public class Event extends Product {
 
     public Collection<Appointment> getAppoinments (Date date){
         SortedSet<Appointment> appointmentsOnDate = new TreeSet<>();
+        GregorianCalendar start = new GregorianCalendar();
+        GregorianCalendar end = new GregorianCalendar();
+
+        start.setTime(date);
+        start.set(Calendar.HOUR_OF_DAY,0);
+        start.set(Calendar.MINUTE,0);
+        end.setTime(date);
+        end.set(Calendar.HOUR_OF_DAY,23);
+        end.set(Calendar.MINUTE, 59);
+
         for (Appointment appointment : appointments){
-            if ( (appointment.getStart().getTimeInMillis() <= date.getTime() && appointment.getEnd().getTimeInMillis() >= date.getTime()) ){
+            if ( (start.before(appointment.getStart()) && end.after(appointment.getStart())) ){
                 appointmentsOnDate.add(appointment);
             }
+
         }
         return appointmentsOnDate;
+    }
+
+    public int compareTo(Event event){
+        return this.name.compareTo(event.name);
     }
 }

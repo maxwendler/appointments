@@ -5,8 +5,17 @@ import java.util.*;
 
 public class ArtistGroup {
 
+    private String name;
     private Set<Show> shows = new TreeSet<Show>();
     private Set<Artist> artists = new TreeSet<Artist>();
+
+    public ArtistGroup(String name){
+        this.name = name;
+    }
+
+    public void addShow (Show show){
+        shows.add(show);
+    }
 
     public Collection<Appointment> getShowAppointments(Date date){
         SortedSet<Appointment> showAppointments = new TreeSet<>();

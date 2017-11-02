@@ -1,5 +1,8 @@
 package kickstart;
 
+import javafx.scene.input.DataFormat;
+
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -16,7 +19,7 @@ public class Appointment implements Comparable<Appointment>{
     }
 
     public int compareTo(Appointment a){
-        return start.compareTo(a.start);
+        return this.start.compareTo(a.start);
     }
 
     public GregorianCalendar getStart(){
@@ -27,9 +30,12 @@ public class Appointment implements Comparable<Appointment>{
         return end;
     }
 
-    public String getTime(){
-        return start.get(Calendar.HOUR_OF_DAY) + ":" + start.get(Calendar.MINUTE) + " - " +
-                end.get(Calendar.HOUR_OF_DAY) + ":" + end.get(Calendar.MINUTE);
+    public String toString(){
+        DateFormat df = DateFormat.getTimeInstance();
+        String startString = df.format(start.getTime());
+        String endString = df.format(end.getTime());
+
+        return startString + " - " + endString;
     }
 
 }
