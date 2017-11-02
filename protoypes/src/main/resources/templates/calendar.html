@@ -27,9 +27,8 @@
         </tr>
         <tr th:each="week : ${weeks}">
             <td th:each="day : ${week.days}">
-                <form  th:if="${day}">
+                <form  th:if="${day}" >
                     <input type="button" style="width:100%" th:value="${day.getDayOfMonth()}"
-                    onclick="window.location.href='http://localhost:8080/book?eventId='"></input>
                 </form>
             </td>
         </tr>
