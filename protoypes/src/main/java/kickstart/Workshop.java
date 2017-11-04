@@ -7,11 +7,9 @@ import java.util.List;
 public class Workshop extends Event{
 
     private int durationInDays;
-    private Artist organizer;
 
     public Workshop(String name, int durationInHours, int durationInDays, Artist organizer){
-        super(name,durationInHours);
-        this.organizer = organizer;
+        super(name,durationInHours,organizer);
         this.durationInDays = durationInDays;
     }
 
@@ -21,7 +19,7 @@ public class Workshop extends Event{
         }
     }
 
-    public Artist getOrganizer() {
+    public Organizer getOrganizer() {
         return organizer;
     }
 }

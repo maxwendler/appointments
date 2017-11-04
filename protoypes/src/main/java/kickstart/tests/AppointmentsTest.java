@@ -34,7 +34,7 @@ public class AppointmentsTest {
         artist.addOfftime(o1);
         artist.addOfftime(o2);
 
-        calendar = new GregorianCalendar(2017,11,2);
+        calendar = new GregorianCalendar(2017,11,1);
     }
 
     @Test

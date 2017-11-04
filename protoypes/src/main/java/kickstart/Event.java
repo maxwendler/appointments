@@ -1,6 +1,7 @@
 package kickstart;
 
 import javafx.util.Pair;
+import org.salespointframework.catalog.Catalog;
 import org.salespointframework.catalog.Product;
 
 import java.util.*;
@@ -10,10 +11,15 @@ public class Event implements Comparable<Event>{
     protected String name;
     protected int durationInHours;
     protected SortedSet<Appointment> appointments = new TreeSet<>();
+    protected Organizer organizer;
 
-    public Event(String name, int durationInHours) {
+    public Event(String name, int durationInHours, Organizer organizer) {
         this.name = name;
         this.durationInHours = durationInHours;
+        this.organizer = organizer;
+
+        //gute Programmierpraktik, das Event hier schon zur Collection des Organizers hinzuzufügen?:
+        //organizer.addEvent(this); ?
     }
 
     public String getName(){
@@ -24,7 +30,7 @@ public class Event implements Comparable<Event>{
         appointments.add(new Appointment(year, month, dayOfMonth, hourOfDay, minute, durationInHours));
     }
 
-    public Collection<Appointment> getAppoinments (Date date){
+    public Collection<Appointment> getAppointments (Date date){
         SortedSet<Appointment> appointmentsOnDate = new TreeSet<>();
         GregorianCalendar start = new GregorianCalendar();
         GregorianCalendar end = new GregorianCalendar();
@@ -47,5 +53,9 @@ public class Event implements Comparable<Event>{
 
     public int compareTo(Event event){
         return this.name.compareTo(event.name);
+    }
+
+    public Organizer getOrganizer() {
+        return organizer;
     }
 }
