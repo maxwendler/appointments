@@ -7,8 +7,21 @@
 </head>
 <body>
     <h1 th:text="${eventName}"></h1>
-    <table style="width:100% ">
-        <tr th:each="appointment : ${appointments}" th:value="${appointment.toString()}"></tr>
+    <h1 th:text="${date}"></h1>
+    <table style="width: 100%">
+        <tr>
+            <th>Belegt:</th>
+        </tr>
+        <tr th:each="appointment : ${appointments}">
+           <td th:text="${appointment.toString()}"></td>
+        </tr>
     </table>
+    <form th:action="${'http://localhost:8080/newAppointment?eventId=' + eventId + '&amp;date=' + date}" th:object="${formBacker}"  method="post">
+        <p th:text="${'Dauer: ' + duration + ' Stunden'}"></p>
+        <p>Startzeit:</p>
+        <input type="time" th:field="*{timeString}"></input>
+        <br></br>
+        <input type="submit" value="Buchen"></input>
+    </form>
 </body>
 </html>

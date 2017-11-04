@@ -17,9 +17,6 @@ public class Event implements Comparable<Event>{
         this.name = name;
         this.durationInHours = durationInHours;
         this.organizer = organizer;
-
-        //gute Programmierpraktik, das Event hier schon zur Collection des Organizers hinzuzufügen?:
-        //organizer.addEvent(this); ?
     }
 
     public String getName(){
@@ -28,6 +25,10 @@ public class Event implements Comparable<Event>{
 
     public void addAppointment(int year, int month, int dayOfMonth, int hourOfDay, int minute){
         appointments.add(new Appointment(year, month, dayOfMonth, hourOfDay, minute, durationInHours));
+    }
+
+    public void addAppointment(Date date){
+        appointments.add(new Appointment(date,durationInHours));
     }
 
     public Collection<Appointment> getAppointments (Date date){
@@ -57,5 +58,9 @@ public class Event implements Comparable<Event>{
 
     public Organizer getOrganizer() {
         return organizer;
+    }
+
+    public int getDurationInHours() {
+        return durationInHours;
     }
 }

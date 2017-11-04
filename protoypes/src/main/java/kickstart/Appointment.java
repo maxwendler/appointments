@@ -4,6 +4,7 @@ import javafx.scene.input.DataFormat;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Appointment implements Comparable<Appointment>{
@@ -15,6 +16,14 @@ public class Appointment implements Comparable<Appointment>{
 
         this.start = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute);
         this.end = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute);
+        end.add(Calendar.HOUR_OF_DAY,durationInHours);
+    }
+
+    public Appointment(Date date, int durationInHours){
+        this.start = new GregorianCalendar();
+        start.setTime(date);
+        this.end = new GregorianCalendar();
+        end.setTime(date);
         end.add(Calendar.HOUR_OF_DAY,durationInHours);
     }
 
