@@ -24,7 +24,7 @@ public class Event implements Comparable<Event>{
         appointments.add(new Appointment(year, month, dayOfMonth, hourOfDay, minute, durationInHours));
     }
 
-    public Collection<Appointment> getAppoinments (Date date){
+    public Collection<Appointment> getAppointments (Date date){
         SortedSet<Appointment> appointmentsOnDate = new TreeSet<>();
         GregorianCalendar start = new GregorianCalendar();
         GregorianCalendar end = new GregorianCalendar();
