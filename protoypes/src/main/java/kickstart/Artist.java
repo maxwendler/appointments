@@ -2,19 +2,17 @@ package kickstart;
 
 import java.util.*;
 
-public class Artist {
-
-    private String name;
+public class Artist extends Organizer{
 
     private SortedSet<OffTime> offTimes = new TreeSet<OffTime>();
     private SortedSet<Workshop> workshops = new TreeSet<>();
     private Set<ArtistGroup> groups = new HashSet<>();
 
     public Artist(String name){
-        this.name = name;
+        super(name);
     }
 
-    public Iterable<Appointment> getAppointments (Date date){
+    public Collection<Appointment> getAppointments (Date date){
         SortedSet<Appointment> appointments = new TreeSet<>();
         appointments.addAll(getPersonalAppointments(date));
         for (ArtistGroup group : groups){
@@ -23,12 +21,11 @@ public class Artist {
         return appointments;
     }
 
-
     public Collection<Appointment> getPersonalAppointments (Date date){
         SortedSet<Appointment> personalAppointments = new TreeSet<>();
 
         for (Event workshop : workshops){
-            personalAppointments.addAll(workshop.getAppoinments(date));
+            personalAppointments.addAll(workshop.getAppointments(date));
         }
 
         GregorianCalendar start = new GregorianCalendar();

@@ -1,7 +1,6 @@
 package kickstart.controller;
 
-import kickstart.CalendarModel;
-import kickstart.Event;
+import kickstart.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +21,13 @@ public class CalendarController {
     public CalendarController (CalendarModel calendarModel){
 
         this.calendarModel = calendarModel;
+        Artist fridolin = new Artist("Fridolin");
+        Workshop w1 = new Workshop("Jonglieren auf zwei Beinen",2,1,fridolin);
+        Workshop w2 = new Workshop("Jonglieren auf zwei Füßen",3,4,fridolin);
+        OffTime o1 = new OffTime(OffTime.Regularity.DAILY,2017,10,6,0,0,12);
 
-        Event ex1 = new Event("Fliegen lernen mit Fridolin",2);
-        ex1.addAppointment(2017,10,5,13,30);
-        eventCatalog.put("e0001",ex1);
+        fridolin.addWorkshop(w1);
+        fridolin.addWorkshop(w2);
 
     }
 
@@ -75,7 +77,7 @@ public class CalendarController {
         }else{
             model.addAttribute("eventName",event.getName());
             model.addAttribute("date",dateString);
-            model.addAttribute("appointments",event.getAppoinments(date));
+            model.addAttribute("appointments",event.getOrganizer().getAppointments(date));
         }
 
         return "book";

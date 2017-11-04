@@ -7,10 +7,8 @@
 </head>
 <body>
     <h1 th:text="${eventName}"></h1>
-    <table style="width: 100%">
-        <tr th:each="start : ${appointments}">
-
-        </tr>
+    <table style="width:100% ">
+        <tr th:each="appointment : ${appointments}" th:value="${appointment.toString()}"></tr>
     </table>
 </body>
 </html>

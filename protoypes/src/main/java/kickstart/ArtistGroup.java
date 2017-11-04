@@ -3,14 +3,13 @@ package kickstart;
 
 import java.util.*;
 
-public class ArtistGroup {
+public class ArtistGroup extends Organizer{
 
-    private String name;
     private Set<Show> shows = new TreeSet<Show>();
     private Set<Artist> artists = new TreeSet<Artist>();
 
     public ArtistGroup(String name){
-        this.name = name;
+        super(name);
     }
 
     public void addShow (Show show){
@@ -20,18 +19,17 @@ public class ArtistGroup {
     public Collection<Appointment> getShowAppointments(Date date){
         SortedSet<Appointment> showAppointments = new TreeSet<>();
         for (Event show : shows){
-            showAppointments.addAll(show.getAppoinments(date));
+            showAppointments.addAll(show.getAppointments(date));
         }
         return showAppointments;
     }
 
     public Collection<Appointment> getAppointments(Date date){
-        SortedSet<Appointment> times = new TreeSet<>();
-        times.addAll(getShowAppointments(date));
+        SortedSet<Appointment> appointments = new TreeSet<>();
         for (Artist artist : artists){
-            times.addAll(artist.getPersonalAppointments(date));
+            appointments.addAll(artist.getAppointments(date));
         }
-        return times;
+        return appointments;
     }
 }
 
