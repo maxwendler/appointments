@@ -32,12 +32,14 @@ public class CalendarController {
     }
 
     @RequestMapping("/calendar")
-    public String calendar(@RequestParam("eventId") Optional<String> eventId, @RequestParam("month") Optional<String> monthSummand, Model model) {
+    public String calendar(@RequestParam("eventId") Optional<String> eventId, @RequestParam("month") int monthSummand, Model model) {
 
-        calendarModel.addToMonth(Integer.valueOf(monthSummand.orElse("0")));
+        CalendarModel calendarModel = new CalendarModel();
+        calendarModel.addToMonth(monthSummand);
 
         model.addAttribute("year", calendarModel.getYear());
-        model.addAttribute("month",calendarModel.getMonth());
+        model.addAttribute("monthSummand",monthSummand);
+        model.addAttribute("monthString",calendarModel.getMonthString());
         model.addAttribute("weeks",calendarModel.getWeeks());
 
         if (eventId.isPresent()) {

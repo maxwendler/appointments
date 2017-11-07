@@ -18,7 +18,7 @@ public class CalendarModelTest {
     @Test
     public void addToMonth() throws Exception {
         calendarModel.addToMonth(5);
-        assertEquals(calendarModel.getMonth(),"März");
+        assertEquals(calendarModel.getMonthString(),"März");
         assertEquals(calendarModel.getYear(),2018);
     }
 
@@ -29,7 +29,7 @@ public class CalendarModelTest {
 
     @Test
     public void getMonth() throws Exception {
-        assertEquals(calendarModel.getMonth(),"Oktober");
+        assertEquals(calendarModel.getMonthString(),"Oktober");
     }
 
     @Test

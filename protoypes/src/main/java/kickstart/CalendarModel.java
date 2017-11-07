@@ -54,7 +54,7 @@ public class CalendarModel {
         return calendar.get(Calendar.YEAR);
     }
 
-    public String getMonth(){
+    public String getMonthString(){
         String monthString;
         switch (calendar.get(Calendar.MONTH)) {
             case 0:
