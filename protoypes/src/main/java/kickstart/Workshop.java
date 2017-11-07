@@ -13,7 +13,7 @@ public class Workshop extends Event{
         this.durationInDays = durationInDays;
     }
 
-    public void addAppointment(int year, int month, int dayOfMonth, int hourOfDay, int minute, int durationInHours) {
+    public void addAppointment(int year, int month, int dayOfMonth, int hourOfDay, int minute) {
         for (int i = 0; i < durationInDays; i++) {
             appointments.add(new Appointment(year, month, dayOfMonth + i, hourOfDay, minute, durationInHours));
         }

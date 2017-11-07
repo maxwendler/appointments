@@ -7,10 +7,17 @@
 </head>
 <body>
     <header>
+<<<<<<< HEAD
         <form th:action="${'http://localhost:8080/calendar?month=' + (monthSummand + 1)}" method="post">
             <input type="submit" value="weiter"></input>
         </form>
         <form th:action="${'http://localhost:8080/calendar?month=' + (monthSummand - 1)}" method="post">
+=======
+        <form action="http://localhost:8080/calendar?month=1" method="post">
+            <input type="submit" value="weiter"></input>
+        </form>
+        <form action="http://localhost:8080/calendar?month=-1" method="post">
+>>>>>>> 9cfe9b5efe4e9c41a10e4966d496e0b7c590066d
             <input type="submit" value="zurück"></input>
         </form>
     </header>
